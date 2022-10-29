@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const lista = require("./models/lista");
 const methodOverride = require("method-override");
 
+const prio = ["Opcional", "Por Hacer", "URGENTE"];
+
 mongoose
   .connect("mongodb://localhost:27017/myPrioList")
   .then(() => {
@@ -47,9 +49,25 @@ app.get("/mylists/:id", async (req, res) => {
   res.render("show", { lista2 });
 });
 
+//entrar a editar lista
+app.get("/mylists/:id/edit", async (req, res) => {
+  const { id } = req.params;
+  const lista2 = await lista.findById(id);
+  res.render("edit", { lista2, prio });
+});
+
+//Borrar lista
 app.delete("/mylists/:id", async (req, res) => {
   const { id } = req.params;
   await lista.findByIdAndDelete(id);
+  res.redirect("/mylists");
+});
+
+//editar lista
+app.put("/mylists/:id", async (req, res) => {
+  const { id } = req.params;
+  const { dtlista } = req.body;
+  await lista.findByIdAndUpdate(id, dtlista);
   res.redirect("/mylists");
 });
 
