@@ -26,16 +26,21 @@ app.use(express.urlencoded({ extended: true }));
 //vizualizar toda las listas
 app.get("/mylists", async (req, res) => {
   const lista2 = await lista.find({});
-  console.log(lista2);
   res.render("myList", { lista2 });
 });
 
 //agregar nueva lista
-app.post("/mylists", (req, res) => {
+app.post("/mylists", async (req, res) => {
   const { dtlista } = req.body;
   const nuevalista = new lista(dtlista);
-  nuevalista.save();
+  await nuevalista.save();
   res.redirect("/mylists");
+});
+
+app.get("/mylists/:id", async (req, res) => {
+  const { id } = req.params;
+  const lista2 = await lista.findById(id);
+  res.render("show", { lista2 });
 });
 
 //crear nueva lista
