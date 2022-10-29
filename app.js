@@ -3,6 +3,7 @@ const app = express();
 const path = require("path");
 const mongoose = require("mongoose");
 const lista = require("./models/lista");
+const methodOverride = require("method-override");
 
 mongoose
   .connect("mongodb://localhost:27017/myPrioList")
@@ -15,6 +16,8 @@ mongoose
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+
+app.use(methodOverride("_method"));
 
 app.get("/", (req, res) => {
   res.render("home");
@@ -37,10 +40,17 @@ app.post("/mylists", async (req, res) => {
   res.redirect("/mylists");
 });
 
+//mostrar mas informacion de las listas
 app.get("/mylists/:id", async (req, res) => {
   const { id } = req.params;
   const lista2 = await lista.findById(id);
   res.render("show", { lista2 });
+});
+
+app.delete("/mylists/:id", async (req, res) => {
+  const { id } = req.params;
+  await lista.findByIdAndDelete(id);
+  res.redirect("/mylists");
 });
 
 //crear nueva lista

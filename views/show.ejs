@@ -11,5 +11,9 @@
     <h2><%= lista2.nombre %></h2>
     <h3>Prioridad: <%= lista2.prioridad %></h3>
     <p><%= lista2.descripcion %></p>
+    <form action="/mylists/<%= lista2._id%>?_method=DELETE" method="POST">
+      <button>Borrar Lista!</button>
+    </form>
+    <a href="/mylists">regresar a mis lista</a>
   </body>
 </html>
