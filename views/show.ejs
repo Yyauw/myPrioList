@@ -9,7 +9,6 @@
   <body>
     <h1>INFOOOOO</h1>
     <h2><%= lista2.nombre %></h2>
-    <h3>Prioridad: <%= lista2.prioridad %></h3>
     <p><%= lista2.descripcion %></p>
 
     <section>
@@ -25,13 +24,15 @@
           >
             <button>Borrar tarea</button>
           </form>
+          <a href="/mylists/<%= lista2._id%>/<%= datos._id%>/edittask"
+            >editar</a
+          >
         </div>
         <% } %> <% } %>
       </div>
 
       <div class="Por-Hacer">
-        <% for(let datos of lista2.tareas){ if(datos.prioridad ===
-        'PorHacer'){%>
+        <% for(let datos of lista2.tareas){ if(datos.prioridad === 'Por Hacer'){%>
         <div>
           <h4><%= datos.nombre%> - <%= datos.prioridad%></h4>
           <p><%= datos.descripcion%></p>
@@ -41,6 +42,9 @@
           >
             <button>Borrar tarea</button>
           </form>
+          <a href="/mylists/<%= lista2._id%>/<%= datos._id%>/edittask"
+            >editar</a
+          >
         </div>
         <% } %> <% } %>
       </div>
@@ -57,6 +61,9 @@
           >
             <button>Borrar tarea</button>
           </form>
+          <a href="/mylists/<%= lista2._id%>/<%= datos._id%>/edittask"
+            >editar</a
+          >
         </div>
         <% } %> <% } %>
       </div>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Crear nueva lista</title>
+    <title>Editar lista</title>
   </head>
   <body>
     <a href="/">HOME</a>
@@ -29,14 +29,6 @@
           cols="30"
           rows="10"
         ><%= lista2.descripcion%></textarea>
-      </div>
-      <div>
-        <label for="lprio">Prioridad</label>
-        <select name="dtlista[prioridad]" id="lprio">
-            <% for(let categoria of prio){ %>
-                <option value='<%= categoria%>' <%= (lista2.prioridad === categoria ? 'selected': '')%>><%= categoria%></option> 
-                <% } %>  
-        </select>
       </div>
       <button>Guardar Cambios</button>
     </form>
