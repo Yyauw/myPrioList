@@ -12,6 +12,7 @@
     <ul>
       <% for(let dato of lista2){ %>
       <li><a href="/mylists/<%= dato._id%> "><%= dato.nombre%></a></li>
+      <p><%= dato.descripcion%></p>
       <% } %>
     </ul>
     <a href="/newList">Crear nueva lista</a>
