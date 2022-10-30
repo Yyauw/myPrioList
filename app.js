@@ -73,7 +73,7 @@ app.post("/mylists/:id", async (req, res) => {
   const listaselec = await lista.findById(id);
   listaselec.tareas.push(nuevatarea);
   listaselec.save();
-  res.redirect("/mylists");
+  res.redirect("/mylists/" + id);
 });
 
 //borrar tarea
@@ -92,6 +92,10 @@ app.delete("/mylists/:id/:taskid", async (req, res) => {
 //Borrar lista
 app.delete("/mylists/:id", async (req, res) => {
   const { id } = req.params;
+  const datolista = await lista.findById(id);
+  for (const dtos of datolista.tareas) {
+    await tareas.findByIdAndDelete(dtos._id);
+  }
   await lista.findByIdAndDelete(id);
   res.redirect("/mylists");
 });
