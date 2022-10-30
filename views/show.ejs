@@ -11,6 +11,59 @@
     <h2><%= lista2.nombre %></h2>
     <h3>Prioridad: <%= lista2.prioridad %></h3>
     <p><%= lista2.descripcion %></p>
+
+    <section>
+      <h2>Tareas</h2>
+      <div class="Urgente">
+        <% for(let datos of lista2.tareas){ if(datos.prioridad ==='URGENTE'){%>
+        <div>
+          <h4><%= datos.nombre%> - <%= datos.prioridad%></h4>
+          <p><%= datos.descripcion%></p>
+          <form
+            action="/mylists/<%= lista2._id%>/<%= datos._id%>?_method=DELETE"
+            method="POST"
+          >
+            <button>Borrar tarea</button>
+          </form>
+        </div>
+        <% } %> <% } %>
+      </div>
+
+      <div class="Por-Hacer">
+        <% for(let datos of lista2.tareas){ if(datos.prioridad ===
+        'PorHacer'){%>
+        <div>
+          <h4><%= datos.nombre%> - <%= datos.prioridad%></h4>
+          <p><%= datos.descripcion%></p>
+          <form
+            action="/mylists/<%= lista2._id%>/<%= datos._id%>?_method=DELETE"
+            method="POST"
+          >
+            <button>Borrar tarea</button>
+          </form>
+        </div>
+        <% } %> <% } %>
+      </div>
+
+      <div class="Opcional">
+        <% for(let datos of lista2.tareas){ if(datos.prioridad ===
+        'Opcional'){%>
+        <div>
+          <h4><%= datos.nombre%> - <%= datos.prioridad%></h4>
+          <p><%= datos.descripcion%></p>
+          <form
+            action="/mylists/<%= lista2._id%>/<%= datos._id%>?_method=DELETE"
+            method="POST"
+          >
+            <button>Borrar tarea</button>
+          </form>
+        </div>
+        <% } %> <% } %>
+      </div>
+
+      <a href="/mylists/<%= lista2._id%>/newtask">Agregar tarea</a>
+    </section>
+
     <form action="/mylists/<%= lista2._id%>?_method=DELETE" method="POST">
       <button>Borrar Lista!</button>
     </form>

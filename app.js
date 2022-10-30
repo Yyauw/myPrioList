@@ -3,6 +3,7 @@ const app = express();
 const path = require("path");
 const mongoose = require("mongoose");
 const lista = require("./models/lista");
+const tareas = require("./models/tareas");
 const methodOverride = require("method-override");
 
 const prio = ["Opcional", "Por Hacer", "URGENTE"];
@@ -45,8 +46,15 @@ app.post("/mylists", async (req, res) => {
 //mostrar mas informacion de las listas
 app.get("/mylists/:id", async (req, res) => {
   const { id } = req.params;
-  const lista2 = await lista.findById(id);
+  const lista2 = await lista.findById(id).populate("tareas");
   res.render("show", { lista2 });
+});
+
+//Crear nueva tarea dentro de la lista
+app.get("/mylists/:id/newtask", async (req, res) => {
+  const { id } = req.params;
+  const lista2 = await lista.findById(id);
+  res.render("newtask", { lista2, prio });
 });
 
 //entrar a editar lista
@@ -54,6 +62,31 @@ app.get("/mylists/:id/edit", async (req, res) => {
   const { id } = req.params;
   const lista2 = await lista.findById(id);
   res.render("edit", { lista2, prio });
+});
+
+//agregar nueva tarea
+app.post("/mylists/:id", async (req, res) => {
+  const { dttarea } = req.body;
+  const { id } = req.params;
+  const nuevatarea = new tareas(dttarea);
+  await nuevatarea.save();
+  const listaselec = await lista.findById(id);
+  listaselec.tareas.push(nuevatarea);
+  listaselec.save();
+  res.redirect("/mylists");
+});
+
+//borrar tarea
+app.delete("/mylists/:id/:taskid", async (req, res) => {
+  const { id, taskid } = req.params;
+  await lista.findByIdAndUpdate(
+    id,
+    { $pull: { tareas: taskid } },
+    { multi: true }
+  );
+  await tareas.findByIdAndDelete(taskid);
+
+  res.redirect("/mylists");
 });
 
 //Borrar lista

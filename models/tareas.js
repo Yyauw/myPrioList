@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const listSchema = new mongoose.Schema({
+const tareasSchema = new mongoose.Schema({
   nombre: {
     type: String,
     required: true,
@@ -12,9 +12,8 @@ const listSchema = new mongoose.Schema({
     type: String,
     enum: ["Opcional", "Por Hacer", "URGENTE"],
   },
-  tareas: [{ type: mongoose.Schema.Types.ObjectId, ref: "tareas" }],
 });
 
-const lista = mongoose.model("listas", listSchema);
+const tareas = mongoose.model("tareas", tareasSchema);
 
-module.exports = lista;
+module.exports = tareas;
