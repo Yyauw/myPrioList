@@ -57,6 +57,13 @@ app.get("/mylists/:id/newtask", async (req, res) => {
   res.render("newtask", { lista2, prio });
 });
 
+//editar tareas
+app.get("/mylists/:id/:taskid/edittask", async (req, res) => {
+  const { id, taskid } = req.params;
+  const tarea2 = await tareas.findById(taskid);
+  res.render("taskedit", { tarea2, prio, id });
+});
+
 //entrar a editar lista
 app.get("/mylists/:id/edit", async (req, res) => {
   const { id } = req.params;
@@ -86,7 +93,7 @@ app.delete("/mylists/:id/:taskid", async (req, res) => {
   );
   await tareas.findByIdAndDelete(taskid);
 
-  res.redirect("/mylists");
+  res.redirect("/mylists/" + id);
 });
 
 //Borrar lista
@@ -106,6 +113,13 @@ app.put("/mylists/:id", async (req, res) => {
   const { dtlista } = req.body;
   await lista.findByIdAndUpdate(id, dtlista);
   res.redirect("/mylists");
+});
+
+app.put("/mylists/:id/:taskid", async (req, res) => {
+  const { id, taskid } = req.params;
+  const { dttarea } = req.body;
+  await tareas.findByIdAndUpdate(taskid, dttarea);
+  res.redirect("/mylists/" + id);
 });
 
 //crear nueva lista
