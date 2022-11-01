@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nueva tareas</title>
-  </head>
-  <body>
+<% layout('../layouts/boilerplate') %> 
     <h1>Agregar nueva tarea</h1>
     <form action="/mylists/<%= lista2._id%>" method="post">
       <div>
@@ -40,5 +32,4 @@
       <button>Agregar Tarea</button>
     </form>
     <a href="/mylists/<%= lista2._id%>">Regresar</a>
-  </body>
-</html>
+
