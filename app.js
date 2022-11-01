@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+const ejsMate = require("ejs-mate");
 const mongoose = require("mongoose");
 const lista = require("./models/lista");
 const tareas = require("./models/tareas");
@@ -17,6 +18,8 @@ mongoose
     console.log(err);
   });
 
+app.use(express.static('public'))
+app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
@@ -24,6 +27,10 @@ app.use(methodOverride("_method"));
 
 app.get("/", (req, res) => {
   res.render("home");
+});
+
+app.get("/home", (req, res) => {
+  res.redirect("/");
 });
 
 //para recibir solicitudes POST
@@ -131,6 +138,6 @@ app.get("*", (req, res) => {
   res.render("pageNotFound");
 });
 
-app.listen(3000, () => {
+app.listen(3001, () => {
   console.log("Listening on port 3000!");
 });
