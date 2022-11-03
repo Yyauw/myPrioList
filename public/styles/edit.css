@@ -1,0 +1,70 @@
+
+.edit{
+    margin: 1% 5%;
+    width: 500px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    background-color: #4db9d4;
+    padding: 5px;
+    box-shadow: 0px 14px 25px -10px rgba(0,0,0,0.75);
+-webkit-box-shadow: 0px 14px 25px -10px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 14px 25px -10px rgba(0,0,0,0.75);
+}
+
+.edit a{
+    margin-top: 20px;
+    margin: 10px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.edit-form div{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.edit-form div label{
+    color: white;
+}
+
+.edit-form div input{
+    border: none;
+    border-radius: 2px;
+    padding: 4px;
+}
+
+.edit-form div textarea{
+    border-radius: 5px;
+}
+
+.edit-form button{
+    margin-left: 175px;
+    margin-bottom: 10px;
+    background-color: #20a520;
+    color: white;
+    border: none;
+    padding: 3px 10px;
+    border-radius: 5px;
+}
+
+.edit-form button:hover{
+    background-color: #028b02;
+    cursor: pointer;
+}
+
+.edit a:hover{
+    text-decoration: underline;
+}
+
+@media (max-width: 550px){
+    .edit{
+        margin: 2.5%;
+        width: 95%;
+    }
+
+    .edit-form button{
+        margin-left: 33%;
+    }
+}

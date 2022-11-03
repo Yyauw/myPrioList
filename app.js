@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const lista = require("./models/lista");
 const tareas = require("./models/tareas");
 const methodOverride = require("method-override");
+const { findById } = require("./models/tareas");
 
 const prio = ["Opcional", "Por Hacer", "URGENTE"];
 
@@ -18,7 +19,7 @@ mongoose
     console.log(err);
   });
 
-app.use(express.static('public'))
+app.use(express.static("public"));
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -120,6 +121,17 @@ app.put("/mylists/:id", async (req, res) => {
   const { dtlista } = req.body;
   await lista.findByIdAndUpdate(id, dtlista);
   res.redirect("/mylists");
+});
+
+//marcar tarea como hecha
+app.get("/mylists/:id/:taskid", async (req, res) => {
+  const { id, taskid } = req.params;
+  const tarea1 = await tareas.findById(taskid);
+  tarea1.prioridad !== "Hecho"
+    ? await tareas.findByIdAndUpdate(taskid, { prioridad: "Hecho" })
+    : await tareas.findByIdAndUpdate(taskid, { prioridad: "Por Hacer" });
+
+  res.redirect("/mylists/" + id);
 });
 
 app.put("/mylists/:id/:taskid", async (req, res) => {

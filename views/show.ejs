@@ -1,5 +1,4 @@
 <% layout('../layouts/boilerplate') %> 
-    <h1>INFOOOOO</h1>
     <h2><%= lista2.nombre %></h2>
     <p><%= lista2.descripcion %></p>
 
@@ -10,6 +9,14 @@
         <div>
           <h4><%= datos.nombre%> - <%= datos.prioridad%></h4>
           <p><%= datos.descripcion%></p>
+
+          <form
+            action="/mylists/<%= lista2._id%>/<%= datos._id%>"
+            method="GET"
+          >
+            <button>Marcar como hecho</button>
+          </form>
+
           <form
             action="/mylists/<%= lista2._id%>/<%= datos._id%>?_method=DELETE"
             method="POST"
@@ -28,6 +35,14 @@
         <div>
           <h4><%= datos.nombre%> - <%= datos.prioridad%></h4>
           <p><%= datos.descripcion%></p>
+
+          <form
+            action="/mylists/<%= lista2._id%>/<%= datos._id%>"
+            method="GET"
+          >
+            <button>Marcar como hecho</button>
+          </form>
+
           <form
             action="/mylists/<%= lista2._id%>/<%= datos._id%>?_method=DELETE"
             method="POST"
@@ -47,6 +62,14 @@
         <div>
           <h4><%= datos.nombre%> - <%= datos.prioridad%></h4>
           <p><%= datos.descripcion%></p>
+
+          <form
+            action="/mylists/<%= lista2._id%>/<%= datos._id%>"
+            method="GET"
+          >
+            <button>Marcar como hecho</button>
+          </form>
+
           <form
             action="/mylists/<%= lista2._id%>/<%= datos._id%>?_method=DELETE"
             method="POST"
@@ -63,10 +86,33 @@
       <a href="/mylists/<%= lista2._id%>/newtask">Agregar tarea</a>
     </section>
 
-    <form action="/mylists/<%= lista2._id%>?_method=DELETE" method="POST">
-      <button>Borrar Lista!</button>
-    </form>
-    <a href="/mylists/<%= lista2._id%>/edit">Editar</a>
+    <section>
+      <h2>Tareas hechas</h2>
+      <div class="Hecho">
+        <% for(let datos of lista2.tareas){ if(datos.prioridad ===
+        'Hecho'){%>
+        <div>
+          <h4><%= datos.nombre%> - <%= datos.prioridad%></h4>
+          <p><%= datos.descripcion%></p>
+          <form
+            action="/mylists/<%= lista2._id%>/<%= datos._id%>"
+            method="GET"
+          >
+            <button>Marcar como pendiente</button>
+          </form>
+          <form
+            action="/mylists/<%= lista2._id%>/<%= datos._id%>?_method=DELETE"
+            method="POST"
+          >
+            <button>Borrar tarea</button>
+          </form>
+          <a href="/mylists/<%= lista2._id%>/<%= datos._id%>/edittask"
+            >editar</a
+          >
+        </div>
+        <% } %> <% } %>
+      </div>
+      </section>
     <br />
     <a href="/mylists">regresar a mis lista</a>
 

@@ -1,0 +1,99 @@
+.card-list {
+  display: flex;
+  border-radius: 5px;
+  flex-direction: column;
+  margin: 2% 5%;
+}
+
+.card-list h1 {
+  font-size: 35px;
+  padding: 10px;
+  color: gray;
+}
+
+.card-ul {
+  list-style: none;
+  padding: 0;
+}
+
+.card-ul div {
+  border-bottom: 1px solid gray;
+  padding: 5px;
+  width: 600px;
+  margin-bottom: 20px;
+}
+
+.card-ul p {
+  font-size: 20px;
+  overflow-wrap: break-word;
+}
+
+.card-ul nav {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  display: flex;
+
+}
+
+.card-ul nav a {
+  margin-right: 10px;
+  padding: 2px 10px;
+  text-decoration: none;
+  border: 1px solid whitesmoke;
+  border-radius: 5px;
+  background-color: #4f83f3;
+  color: white;
+}
+
+.card-ul nav a:hover{
+    background-color: #135dff;
+}
+
+.card-titulo:hover{
+    text-decoration: underline;
+}
+
+.card-ul nav button {
+  padding: 4px 10px;
+  text-decoration: none;
+  border: 1px solid whitesmoke;
+  border-radius: 5px;
+  background-color: #fd6767;
+  color: white;
+}
+
+.card-ul nav button:hover{
+    cursor: pointer;
+    background-color: #ff2f2f;
+}
+
+.card-titulo {
+  text-decoration: none;
+  color: #4db9d4;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.new-list {
+  text-align: center;
+  border: 1px solid gray;
+  background-color: #20a520;
+  text-decoration: none;
+  color: white;
+  border-radius: 5px;
+  padding: 3px 5px;
+  width: 150px;
+  margin: 20px 0;
+}
+
+.new-list:hover{
+    background-color: #028b02;
+    cursor: pointer;
+}
+
+
+@media (max-width: 650px){
+    .card-ul div{
+        width: 99%;
+    }
+}

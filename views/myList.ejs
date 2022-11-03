@@ -1,10 +1,20 @@
 <% layout('../layouts/boilerplate') %> 
-    <a href="/">HOME</a>
-    <h1>LISTA</h1>
-    <ul>
+<link rel="stylesheet" href="/styles/list.css">
+    <section class="card-list">
+    <h1>My List</h1>
+    <ul class="card-ul">
       <% for(let dato of lista2){ %>
-      <li><a href="/mylists/<%= dato._id%> "><%= dato.nombre%></a></li>
-      <p><%= dato.descripcion%></p>
+        <div>
+      <li><a href="/mylists/<%= dato._id%> " class="card-titulo"><%= dato.nombre%></a></li>
+      <p><%= dato.descripcion%></p>  
+      <nav>
+        <a href="/mylists/<%= dato._id%>/edit">Editar</a>
+    <form action="/mylists/<%= dato._id%>?_method=DELETE" method="POST">
+      <button>Borrar Lista!</button>
+    </form>
+  </nav>
+  </div>
       <% } %>
     </ul>
-    <a href="/newList">Crear nueva lista</a>
+    <a href="/newList" class="new-list">Crear nueva lista</a>
+  </section>
