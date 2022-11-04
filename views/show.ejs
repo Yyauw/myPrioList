@@ -1,81 +1,114 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1>INFOOOOO</h1>
-    <h2><%= lista2.nombre %></h2>
-    <p><%= lista2.descripcion %></p>
+<% layout('../layouts/boilerplate') %>
+<link rel="stylesheet" href="/styles/showtask.css" />
+<div class="task-info">
+  <a href="/mylists" class="regresar">&lt; regresar a mis lista</a>
 
-    <section>
-      <h2>Tareas</h2>
-      <div class="Urgente">
-        <% for(let datos of lista2.tareas){ if(datos.prioridad ==='URGENTE'){%>
-        <div>
-          <h4><%= datos.nombre%> - <%= datos.prioridad%></h4>
-          <p><%= datos.descripcion%></p>
+  <h2><%= lista2.nombre %></h2>
+  <p><%= lista2.descripcion %></p>
+  <a href="/mylists/<%= lista2._id%>/newtask" class="task-info addtask"
+    >Agregar tarea</a
+  >
+</div>
+<section class="alltask">
+  <section class="task-todo">
+    <h2>Tareas</h2>
+    <div class="Urgente">
+      <% for(let datos of lista2.tareas){ if(datos.prioridad ==='URGENTE'){%>
+      <div>
+        <h4><%= datos.nombre%> - <%= datos.prioridad%></h4>
+        <p><%= datos.descripcion%></p>
+        <nav>
+          <form action="/mylists/<%= lista2._id%>/<%= datos._id%>" method="GET">
+            <button class="done">Marcar como hecho</button>
+          </form>
+          <a
+          href="/mylists/<%= lista2._id%>/<%= datos._id%>/edittask"
+          class="edit"
+          >editar</a
+        >
           <form
             action="/mylists/<%= lista2._id%>/<%= datos._id%>?_method=DELETE"
             method="POST"
           >
-            <button>Borrar tarea</button>
+            <button class="delete">Borrar tarea</button>
           </form>
-          <a href="/mylists/<%= lista2._id%>/<%= datos._id%>/edittask"
-            >editar</a
-          >
-        </div>
-        <% } %> <% } %>
+ 
+        </nav>
       </div>
+      <% } %> <% } %>
+    </div>
 
-      <div class="Por-Hacer">
-        <% for(let datos of lista2.tareas){ if(datos.prioridad === 'Por Hacer'){%>
-        <div>
-          <h4><%= datos.nombre%> - <%= datos.prioridad%></h4>
-          <p><%= datos.descripcion%></p>
+    <div class="Por-Hacer">
+      <% for(let datos of lista2.tareas){ if(datos.prioridad === 'Por Hacer'){%>
+      <div>
+        <h4><%= datos.nombre%> - <%= datos.prioridad%></h4>
+        <p><%= datos.descripcion%></p>
+        <nav>
+          <form action="/mylists/<%= lista2._id%>/<%= datos._id%>" method="GET">
+            <button class="done">Marcar como hecho</button>
+          </form>
+
+          <a href="/mylists/<%= lista2._id%>/<%= datos._id%>/edittask"
+            class="edit">editar</a
+          >
+
           <form
             action="/mylists/<%= lista2._id%>/<%= datos._id%>?_method=DELETE"
             method="POST"
           >
-            <button>Borrar tarea</button>
+            <button class="delete">Borrar tarea</button>
+          </form>
+        
+        </nav>
+      </div>
+      <% } %> <% } %>
+    </div>
+
+    <div class="Opcional">
+      <% for(let datos of lista2.tareas){ if(datos.prioridad === 'Opcional'){%>
+      <div>
+        <h4><%= datos.nombre%> - <%= datos.prioridad%></h4>
+        <p><%= datos.descripcion%></p>
+        <nav>
+          <form action="/mylists/<%= lista2._id%>/<%= datos._id%>" method="GET">
+            <button class="done">Marcar como hecho</button>
           </form>
           <a href="/mylists/<%= lista2._id%>/<%= datos._id%>/edittask"
-            >editar</a
+            class="edit" >editar</a
           >
-        </div>
-        <% } %> <% } %>
-      </div>
-
-      <div class="Opcional">
-        <% for(let datos of lista2.tareas){ if(datos.prioridad ===
-        'Opcional'){%>
-        <div>
-          <h4><%= datos.nombre%> - <%= datos.prioridad%></h4>
-          <p><%= datos.descripcion%></p>
           <form
             action="/mylists/<%= lista2._id%>/<%= datos._id%>?_method=DELETE"
             method="POST"
           >
-            <button>Borrar tarea</button>
+            <button class="delete" >Borrar tarea</button>
           </form>
-          <a href="/mylists/<%= lista2._id%>/<%= datos._id%>/edittask"
-            >editar</a
-          >
-        </div>
-        <% } %> <% } %>
+      
+        </nav>
       </div>
+      <% } %> <% } %>
+    </div>
+  </section>
 
-      <a href="/mylists/<%= lista2._id%>/newtask">Agregar tarea</a>
-    </section>
-
-    <form action="/mylists/<%= lista2._id%>?_method=DELETE" method="POST">
-      <button>Borrar Lista!</button>
-    </form>
-    <a href="/mylists/<%= lista2._id%>/edit">Editar</a>
-    <br />
-    <a href="/mylists">regresar a mis lista</a>
-  </body>
-</html>
+  <section class="task-todo">
+    <h2>Tareas hechas</h2>
+    <div class="Hecho">
+      <% for(let datos of lista2.tareas){ if(datos.prioridad === 'Hecho'){%>
+      <div>
+        <h4><%= datos.nombre%> - <%= datos.prioridad%></h4>
+        <p><%= datos.descripcion%></p>
+        <nav>
+          <form action="/mylists/<%= lista2._id%>/<%= datos._id%>" method="GET">
+            <button class="undone">Marcar como pendiente</button>
+          </form>
+          <form
+            action="/mylists/<%= lista2._id%>/<%= datos._id%>?_method=DELETE"
+            method="POST"
+          >
+            <button class="delete">Borrar tarea</button>
+          </form>
+        </nav>
+      </div>
+      <% } %> <% } %>
+    </div>
+  </section>
+</section>

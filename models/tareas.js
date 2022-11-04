@@ -10,7 +10,7 @@ const tareasSchema = new mongoose.Schema({
   },
   prioridad: {
     type: String,
-    enum: ["Opcional", "Por Hacer", "URGENTE"],
+    enum: ["Opcional", "Por Hacer", "URGENTE","Hecho"],
   },
 });
 

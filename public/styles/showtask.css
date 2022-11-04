@@ -1,0 +1,178 @@
+main {
+  margin: 0 5%;
+}
+
+.task-info {
+  margin-top: 15px;
+}
+
+.task-info a {
+  text-decoration: none;
+  color: gray;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.task-info a:hover {
+  text-decoration: underline;
+}
+
+.task-info .addtask {
+  font-size: 15px;
+  font-weight: normal;
+  border-radius: 5px;
+  padding: 1px 5px;
+  background-color: #20a520;
+  color: white;
+}
+
+.task-info .addtask:hover {
+  text-decoration: none;
+  background-color: #028b02;
+}
+
+.task-info h2 {
+  color: #4db9d4;
+}
+
+.task-info p {
+  color: gray;
+  margin-bottom: 10px;
+  width: 500px;
+}
+
+.alltask {
+  margin-top: 10px;
+  display: flex;
+  margin-bottom: 2%;
+}
+
+.task-todo {
+  width: 50%;
+}
+
+.task-done {
+  width: 50%;
+}
+
+.task-todo h2 {
+  color: gray;
+  text-transform: uppercase;
+}
+
+.task-todo div div {
+  padding: 5px;
+  border-bottom: 1px solid gray;
+  width: 90%;
+}
+
+.task-todo div h4 {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.task-todo div p {
+  color: black;
+  font-size: 15px;
+  overflow-wrap: break-word;
+}
+
+.task-todo nav {
+  margin: 10px 0;
+  display: flex;
+}
+
+.task-todo nav button {
+  border: none;
+  padding: 3px 8px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+}
+
+.done {
+  background-color: #20a520;
+}
+
+.done:hover{
+    background-color: #028b02;
+}
+
+.delete {
+  background-color: #fd6767;
+}
+
+.delete:hover {
+  background-color: #ff2f2f;
+}
+
+.undone{
+    background-color: orange;
+    margin-right: 10px;
+}
+
+.undone:hover{
+    background-color: #ff9900;
+}
+
+.edit {
+  text-decoration: none;
+  color: white;
+  background-color: #4f83f3;
+  padding: 0 10px;
+  border: 1px solid gray;
+  border-radius: 3px;
+  margin: 0 5px;
+}
+
+.edit:hover{
+    background-color: #135dff;
+}
+
+.task-done h2 {
+  color: gray;
+  text-transform: uppercase;
+}
+
+.task-done nav {
+  display: flex;
+}
+
+.Por-Hacer {
+    color:orange ;
+  border-radius: 5px;
+}
+
+.Hecho h4{
+    color: green;
+}
+
+.Urgente h4{
+    color: #fd6767;
+}
+
+.Opcional h4{
+    color: #4f83f3;
+}
+
+@media(max-width: 950px){
+    main{
+        margin: 0 2%;
+    }
+
+    .alltask{
+        flex-direction: column;
+    }
+
+    .task-todo{
+        width: 100%;
+    }
+
+    .task-done{
+        width: 100%;
+    }
+
+    .task-info p{
+        width: 95%;
+    }
+}

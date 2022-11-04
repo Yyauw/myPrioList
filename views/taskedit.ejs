@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Editar Tarea</title>
-  </head>
-  <body>
-    <a href="/">HOME</a>
-    <form action="/mylists/<%= id%>/<%= tarea2._id%>?_method=PUT" method="post">
+<% layout('../layouts/boilerplate') %> 
+<link rel="stylesheet" href="/styles/edit.css" />
+  <section class="edit">
+    <a href="/mylists/<%= id%>">&lt; Regresar</a>
+    <h2>Crear Nueva Tarea</h2>
+    <form action="/mylists/<%= id%>/<%= tarea2._id%>?_method=PUT" method="post" class="edit-form">
       <div>
         <label for="lnombre">Tarea</label>
         <input
@@ -22,12 +17,11 @@
       </div>
       <div>
         <label for="ldesc">Descripcion</label>
-        <br />
         <textarea
           name="dttarea[descripcion]"
           id="ldesc"
           cols="30"
-          rows="10"
+          rows="1"
         ><%= tarea2.descripcion%></textarea>
       </div>
       <div>
@@ -40,6 +34,5 @@
       </div>
       <button>Guardar Cambios</button>
     </form>
-    <a href="/mylists/<%= id%>">Regresar</a>
-  </body>
-</html>
+  </section>
+    
