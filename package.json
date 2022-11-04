@@ -21,6 +21,7 @@
     "ejs-mate": "^4.0.0",
     "express": "^4.18.2",
     "method-override": "^3.0.0",
-    "mongoose": "^6.6.7"
+    "mongoose": "^6.6.7",
+    "netlify-cli": "^12.0.11"
   }
 }

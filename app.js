@@ -9,9 +9,10 @@ const methodOverride = require("method-override");
 const { findById } = require("./models/tareas");
 
 const prio = ["Opcional", "Por Hacer", "URGENTE"];
-
+//"mongodb://localhost:27017/myPrioList"
+const urldb = 'mongodb+srv://xino:6CPMMGwZ85XfkJ8J@cluster0.yskxjwt.mongodb.net/?retryWrites=true&w=majority'
 mongoose
-  .connect("mongodb://localhost:27017/myPrioList")
+  .connect(urldb)
   .then(() => {
     console.log("SIUUUUUUUU");
   })
