@@ -151,7 +151,7 @@ app.get("*", (req, res) => {
   res.render("pageNotFound");
 });
 
-const porth = process.env.PORT || 3000
+const porth = process.env.PORT || 8885
 
 app.listen(porth, () => {
   console.log("Listening on port 3000!");
