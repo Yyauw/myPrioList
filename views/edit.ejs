@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="/styles/edit.css" />
 <section class="edit">
   <a href="/mylists"> &lt; Regresar a mi listas</a>
+  <h2>Editar: <%= lista2.nombre %></h2>
   <form action="/mylists/<%= lista2._id%>?_method=PUT" method="post" class="edit-form">
     <div>
       <label for="lnombre">Nombre de la lista</label>
@@ -16,7 +17,7 @@
     </div>
     <div>
       <label for="ldesc">Descripcion</label>
-      <textarea name="dtlista[descripcion]" id="ldesc" cols="30" rows="10">
+      <textarea name="dtlista[descripcion]" id="ldesc" cols="30" rows="1" placeholder="Descripcion de la lista">
 <%= lista2.descripcion%></textarea
       >
     </div>

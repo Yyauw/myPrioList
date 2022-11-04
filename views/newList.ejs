@@ -1,6 +1,10 @@
 <% layout('../layouts/boilerplate') %> 
-    <a href="/">HOME</a>
-    <form action="/mylists" method="post">
+<link rel="stylesheet" href="/styles/edit.css" />
+<section class="edit">
+  <a href="/mylists">&lt; Regresar a mi listas</a>
+  <h2>Crear Nueva Lista</h2>
+    <form action="/mylists" method="post" class="edit-form">
+
       <div>
         <label for="lnombre">Nombre de la lista</label>
         <input
@@ -11,16 +15,18 @@
           placeholder="Nombre de la lista"
         />
       </div>
+
       <div>
         <label for="ldesc">Descripcion</label>
-        <br />
         <textarea
           name="dtlista[descripcion]"
           id="ldesc"
           cols="30"
-          rows="10"
+          rows="1"
+          placeholder="Descripcion de la lista"
         ></textarea>
       </div>
+
       <button>Crear Nueva lista</button>
     </form>
-    <a href="/mylists">Regresar a mi listas</a>
+  </section>

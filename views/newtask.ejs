@@ -1,35 +1,37 @@
-<% layout('../layouts/boilerplate') %> 
-    <h1>Agregar nueva tarea</h1>
-    <form action="/mylists/<%= lista2._id%>" method="post">
-      <div>
-        <label for="lnombre">Nombre de la Tarea</label>
-        <input
-          type="text"
-          name="dttarea[nombre]"
-          id="lnombre"
-          required
-          placeholder="Nombre de la lista"
-        />
-      </div>
-      <div>
-        <label for="ldesc">Descripcion</label>
-        <br />
-        <textarea
-          name="dttarea[descripcion]"
-          id="ldesc"
-          cols="30"
-          rows="10"
-        ></textarea>
-      </div>
-      <div>
-        <label for="lprio">Prioridad</label>
-        <select name="dttarea[prioridad]" id="lprio">
-          <% for(let categoria of prio){ %>
-          <option value="<%= categoria%>" %>><%= categoria%></option>
-          <% } %>
-        </select>
-      </div>
-      <button>Agregar Tarea</button>
-    </form>
-    <a href="/mylists/<%= lista2._id%>">Regresar</a>
-
+<% layout('../layouts/boilerplate') %>
+<link rel="stylesheet" href="/styles/edit.css" />
+<section class="edit">
+  <a href="/mylists/<%= lista2._id%>">&lt; Regresar</a>
+  <h2>Agregar nueva tarea</h2>
+  <form action="/mylists/<%= lista2._id%>" method="post" class="edit-form"> 
+    <div>
+      <label for="lnombre">Nombre de la Tarea</label>
+      <input
+        type="text"
+        name="dttarea[nombre]"
+        id="lnombre"
+        required
+        placeholder="Nombre de la lista"
+      />
+    </div>
+    <div>
+      <label for="ldesc">Descripcion</label>
+      <textarea
+        name="dttarea[descripcion]"
+        id="ldesc"
+        cols="30"
+        rows="1"
+        placeholder="Descripcion de la Tarea"
+      ></textarea>
+    </div>
+    <div>
+      <label for="lprio">Prioridad</label>
+      <select name="dttarea[prioridad]" id="lprio">
+        <% for(let categoria of prio){ %>
+        <option value="<%= categoria%>" %>><%= categoria%></option>
+        <% } %>
+      </select>
+    </div>
+    <button>Agregar Tarea</button>
+  </form>
+</section>

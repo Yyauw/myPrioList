@@ -2,19 +2,21 @@
 .edit{
     margin: 1% 5%;
     width: 500px;
-    border: 1px solid gray;
     border-radius: 5px;
-    background-color: #4db9d4;
     padding: 5px;
-    box-shadow: 0px 14px 25px -10px rgba(0,0,0,0.75);
--webkit-box-shadow: 0px 14px 25px -10px rgba(0,0,0,0.75);
--moz-box-shadow: 0px 14px 25px -10px rgba(0,0,0,0.75);
+
+}
+
+.edit h2{
+    padding: 10px 10px 0px 10px;
+    font-size: 30px;
+    color: #4db9d4;
 }
 
 .edit a{
     margin-top: 20px;
     margin: 10px;
-    color: white;
+    color: gray;
     text-decoration: none;
     font-weight: bold;
 }
@@ -26,26 +28,40 @@
 }
 
 .edit-form div label{
-    color: white;
+    color: gray;
 }
 
 .edit-form div input{
     border: none;
-    border-radius: 2px;
     padding: 4px;
+    border-bottom: 1px solid gray;
+    transition: 0.5s padding;
+}
+
+.edit-form div input:focus{
+    outline: none;
+    padding: 10px;
 }
 
 .edit-form div textarea{
-    border-radius: 5px;
+    border: none;
+    border-bottom: 1px solid gray;
+    transition: 0.5s padding;
+}
+
+.edit-form div textarea:focus{
+    outline: none;
+    padding: 10px;
+
 }
 
 .edit-form button{
+    margin-top: 15px;
     margin-left: 175px;
-    margin-bottom: 10px;
     background-color: #20a520;
     color: white;
     border: none;
-    padding: 3px 10px;
+    padding: 4px 10px;
     border-radius: 5px;
 }
 
@@ -56,6 +72,18 @@
 
 .edit a:hover{
     text-decoration: underline;
+}
+
+.edit-form select{
+    margin-top: 3px;
+    font-size: 15px;
+    color: gray;
+    border: none;
+    border-bottom: 1px solid gray;
+}
+
+.edit-form select:focus{
+    outline: none;
 }
 
 @media (max-width: 550px){
