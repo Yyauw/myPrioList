@@ -10,7 +10,7 @@ const { findById } = require("./models/tareas");
 
 const prio = ["Opcional", "Por Hacer", "URGENTE"];
 //"mongodb://localhost:27017/myPrioList"
-const urldb = 'mongodb+srv://xino:6CPMMGwZ85XfkJ8J@cluster0.yskxjwt.mongodb.net/?retryWrites=true&w=majority'
+const urldb = process.env.mdbport || "mongodb://localhost:27017/myPrioList"
 mongoose
   .connect(urldb)
   .then(() => {
@@ -151,7 +151,7 @@ app.get("*", (req, res) => {
   res.render("pageNotFound");
 });
 
-const porth = process.env.PORT || 8885
+const porth = process.env.PORT || 3000
 
 app.listen(porth, () => {
   console.log("Listening on port 3000!");
