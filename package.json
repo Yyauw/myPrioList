@@ -4,7 +4,8 @@
   "description": "my first fullstack proyect!",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -17,10 +18,12 @@
   },
   "homepage": "https://github.com/Yyauw/myPrioList#readme",
   "dependencies": {
+    "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
     "ejs-mate": "^4.0.0",
     "express": "^4.18.2",
     "method-override": "^3.0.0",
-    "mongoose": "^6.6.7"
+    "mongoose": "^6.6.7",
+    "netlify-cli": "^12.0.11"
   }
 }

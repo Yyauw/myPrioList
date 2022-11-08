@@ -9,9 +9,10 @@ const methodOverride = require("method-override");
 const { findById } = require("./models/tareas");
 
 const prio = ["Opcional", "Por Hacer", "URGENTE"];
-
+//"mongodb://localhost:27017/myPrioList"
+const urldb = process.env.mdbport || "mongodb://localhost:27017/myPrioList"
 mongoose
-  .connect("mongodb://localhost:27017/myPrioList")
+  .connect(urldb)
   .then(() => {
     console.log("SIUUUUUUUU");
   })
@@ -150,6 +151,8 @@ app.get("*", (req, res) => {
   res.render("pageNotFound");
 });
 
-app.listen(3000, () => {
+const porth = process.env.PORT || 3000
+
+app.listen(porth, () => {
   console.log("Listening on port 3000!");
 });
