@@ -7,10 +7,14 @@ const lista = require("./models/lista");
 const tareas = require("./models/tareas");
 const methodOverride = require("method-override");
 const { findById } = require("./models/tareas");
+const session = require("express-session");
+const bcrypt = require("bcrypt");
+const User = require("./models/usuarios");
+const { query } = require("express");
 
 const prio = ["Opcional", "Por Hacer", "URGENTE"];
 //"mongodb://localhost:27017/myPrioList"
-const urldb = process.env.mdbport || "mongodb://localhost:27017/myPrioList"
+const urldb = process.env.mdbport || "mongodb://localhost:27017/myPrioList";
 mongoose
   .connect(urldb)
   .then(() => {
@@ -25,6 +29,16 @@ app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+//incluir session en nuestra pag
+const ssecret = process.env.ssecret || "devsecret";
+app.use(
+  session({
+    secret: ssecret,
+    resave: true,
+    saveUninitialized: false,
+  })
+);
+
 app.use(methodOverride("_method"));
 
 app.get("/", (req, res) => {
@@ -38,50 +52,101 @@ app.get("/home", (req, res) => {
 //para recibir solicitudes POST
 app.use(express.urlencoded({ extended: true }));
 
+//middleware verificar session
+const checklogged = (req, res, next) => {
+  if (!req.session.user_id) {
+    return res.redirect("/login");
+  }
+  next();
+};
+
+//login
+app.get("/login", (req, res) => {
+  if (req.session.user_id) {
+    res.redirect("/mylists");
+  } else {
+    res.render("login");
+  }
+});
+
+app.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+  const valuser = await User.validateUser(username, password);
+  if (valuser) {
+    req.session.user_id = valuser._id;
+    res.redirect("/mylists");
+  } else {
+    res.redirect("login");
+  }
+});
+
+//singup
+app.get("/singup", (req, res) => {
+  if (req.session.user_id) {
+    res.redirect("/mylists");
+  } else {
+    res.render("singup");
+  }
+});
+
+app.post("/singup", async (req, res) => {
+  const { username, password, correo } = req.body;
+  const user = new User({ username, password, email: correo });
+  await user.save();
+  req.session.user_id = user._id;
+  res.redirect("/mylists");
+});
+
 //vizualizar toda las listas
-app.get("/mylists", async (req, res) => {
-  const lista2 = await lista.find({});
+app.get("/mylists", checklogged, async (req, res) => {
+  const userid = req.session.user_id;
+  const usuario = await User.findById(userid).populate("userlist");
+  const lista2 = await usuario.userlist;
   res.render("myList", { lista2 });
 });
 
 //agregar nueva lista
-app.post("/mylists", async (req, res) => {
+app.post("/mylists", checklogged, async (req, res) => {
   const { dtlista } = req.body;
+  const userid = req.session.user_id;
   const nuevalista = new lista(dtlista);
   await nuevalista.save();
+  const user = await User.findById(userid);
+  user.userlist.push(nuevalista);
+  await user.save();
   res.redirect("/mylists");
 });
 
 //mostrar mas informacion de las listas
-app.get("/mylists/:id", async (req, res) => {
+app.get("/mylists/:id", checklogged, async (req, res) => {
   const { id } = req.params;
   const lista2 = await lista.findById(id).populate("tareas");
   res.render("show", { lista2 });
 });
 
 //Crear nueva tarea dentro de la lista
-app.get("/mylists/:id/newtask", async (req, res) => {
+app.get("/mylists/:id/newtask", checklogged, async (req, res) => {
   const { id } = req.params;
   const lista2 = await lista.findById(id);
   res.render("newtask", { lista2, prio });
 });
 
 //editar tareas
-app.get("/mylists/:id/:taskid/edittask", async (req, res) => {
+app.get("/mylists/:id/:taskid/edittask", checklogged, async (req, res) => {
   const { id, taskid } = req.params;
   const tarea2 = await tareas.findById(taskid);
   res.render("taskedit", { tarea2, prio, id });
 });
 
 //entrar a editar lista
-app.get("/mylists/:id/edit", async (req, res) => {
+app.get("/mylists/:id/edit", checklogged, async (req, res) => {
   const { id } = req.params;
   const lista2 = await lista.findById(id);
   res.render("edit", { lista2, prio });
 });
 
 //agregar nueva tarea
-app.post("/mylists/:id", async (req, res) => {
+app.post("/mylists/:id", checklogged, async (req, res) => {
   const { dttarea } = req.body;
   const { id } = req.params;
   const nuevatarea = new tareas(dttarea);
@@ -93,7 +158,7 @@ app.post("/mylists/:id", async (req, res) => {
 });
 
 //borrar tarea
-app.delete("/mylists/:id/:taskid", async (req, res) => {
+app.delete("/mylists/:id/:taskid", checklogged, async (req, res) => {
   const { id, taskid } = req.params;
   await lista.findByIdAndUpdate(
     id,
@@ -106,7 +171,7 @@ app.delete("/mylists/:id/:taskid", async (req, res) => {
 });
 
 //Borrar lista
-app.delete("/mylists/:id", async (req, res) => {
+app.delete("/mylists/:id", checklogged, async (req, res) => {
   const { id } = req.params;
   const datolista = await lista.findById(id);
   for (const dtos of datolista.tareas) {
@@ -117,7 +182,7 @@ app.delete("/mylists/:id", async (req, res) => {
 });
 
 //editar lista
-app.put("/mylists/:id", async (req, res) => {
+app.put("/mylists/:id", checklogged, async (req, res) => {
   const { id } = req.params;
   const { dtlista } = req.body;
   await lista.findByIdAndUpdate(id, dtlista);
@@ -125,7 +190,7 @@ app.put("/mylists/:id", async (req, res) => {
 });
 
 //marcar tarea como hecha
-app.get("/mylists/:id/:taskid", async (req, res) => {
+app.get("/mylists/:id/:taskid", checklogged, async (req, res) => {
   const { id, taskid } = req.params;
   const tarea1 = await tareas.findById(taskid);
   tarea1.prioridad !== "Hecho"
@@ -135,7 +200,7 @@ app.get("/mylists/:id/:taskid", async (req, res) => {
   res.redirect("/mylists/" + id);
 });
 
-app.put("/mylists/:id/:taskid", async (req, res) => {
+app.put("/mylists/:id/:taskid", checklogged, async (req, res) => {
   const { id, taskid } = req.params;
   const { dttarea } = req.body;
   await tareas.findByIdAndUpdate(taskid, dttarea);
@@ -143,7 +208,7 @@ app.put("/mylists/:id/:taskid", async (req, res) => {
 });
 
 //crear nueva lista
-app.get("/newlist", (req, res) => {
+app.get("/newlist", checklogged, (req, res) => {
   res.render("newList");
 });
 
@@ -151,7 +216,7 @@ app.get("*", (req, res) => {
   res.render("pageNotFound");
 });
 
-const porth = process.env.PORT || 3000
+const porth = process.env.PORT || 3000;
 
 app.listen(porth, () => {
   console.log("Listening on port 3000!");

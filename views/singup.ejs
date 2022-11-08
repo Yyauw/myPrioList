@@ -1,0 +1,39 @@
+<% layout('../layouts/boilerplate') %>
+<form action="/singup" method="POST">
+    <div>
+      <label for="username">Nombre de usuario</label>
+      <input
+        type="text"
+        name="username"
+        id="username"
+        required
+        placeholder="username"
+      />
+    </div>
+  
+    <div>
+      <label for="password">Contraseña</label>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        required
+        minlength="6"
+        maxlength="30"
+        placeholder="Contraseña"
+      />
+    </div>
+
+    <div>
+        <label for="email">Correo electronico</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          required
+          placeholder="email@example.com"
+        />
+      </div>
+    <button>Sing Up</button>
+  </form>
+<a href="/login">ya tienes cuenta?</a>

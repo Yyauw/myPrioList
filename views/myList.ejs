@@ -8,6 +8,7 @@
       <li><a href="/mylists/<%= dato._id%> " class="card-titulo"><%= dato.nombre%></a></li>
       <p><%= dato.descripcion%></p>  
       <nav>
+        <a href="/mylists/<%= dato._id%>">Ver Lista</a>
         <a href="/mylists/<%= dato._id%>/edit">Editar</a>
     <form action="/mylists/<%= dato._id%>?_method=DELETE" method="POST">
       <button>Borrar Lista!</button>
