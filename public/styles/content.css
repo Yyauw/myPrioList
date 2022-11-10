@@ -126,11 +126,11 @@ main{
 
     .intro figure img{
         height: 450px;
-        width: 500px;
+        width: 550px;
     }
 
     .intro a{
-        margin-left: 22%;
+        margin-left: 80px;
     }
 
     .about-info{
@@ -157,7 +157,7 @@ main{
     }
 }
 
-@media(max-width: 500px){
+@media(max-width: 550px){
 
     .intro figure img{
         height: 250px;
@@ -165,7 +165,7 @@ main{
     }
 
     .intro a{
-        margin-left: 13%;
+        margin-left: 12%;
     }
 
     #about-img{
@@ -193,6 +193,10 @@ main{
 
     .desc-p{
         font-size: 15px;
+    }
+
+    .desc{
+        display: none;
     }
 
 }

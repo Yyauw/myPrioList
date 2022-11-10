@@ -1,0 +1,38 @@
+<% layout('../layouts/boilerplate') %>
+<link rel="stylesheet" href="/styles/loginSinup.css"/>
+<section class="card-sec">
+  <div class="card-border">
+    <a href="/home"><h1>MyPrioList</h1></a>
+
+<form action="/login" method="POST">
+  <% if(authmsg){ %> 
+    <div class="mensaje"> <p>Datos incorrectos, intente denuevo</p></div>
+    <%}%>
+  <div>
+    <label for="username">Nombre de usuario</label>
+    <input
+      type="text"
+      name="username"
+      id="username"
+      required
+      placeholder="username"
+    />
+  </div>
+
+  <div>
+    <label for="password">Contraseña</label>
+    <input
+      type="password"
+      name="password"
+      id="password"
+      required
+      minlength="6"
+      maxlength="30"
+      placeholder="Contraseña"
+    />
+  </div>
+  <button>Log In</button>
+</form>
+<a href="/singup">No tienes cuenta?</a>
+</div>
+</section>
