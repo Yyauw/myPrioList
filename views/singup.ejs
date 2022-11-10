@@ -1,6 +1,10 @@
 <% layout('../layouts/boilerplate') %>
+<link rel="stylesheet" href="/styles/loginSinup.css" />
+<section class="card-sec">
+  <div class="card-border">
+    <a href="/home"><h1>MyPrioList</h1></a>
 <form action="/singup" method="POST">
-    <div>
+    <div class="card-b">
       <label for="username">Nombre de usuario</label>
       <input
         type="text"
@@ -36,4 +40,6 @@
       </div>
     <button>Sing Up</button>
   </form>
-<a href="/login">ya tienes cuenta?</a>
+<a href="/login">Ya tienes cuenta?</a>
+</div>
+</section>

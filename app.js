@@ -62,10 +62,11 @@ const checklogged = (req, res, next) => {
 
 //login
 app.get("/login", (req, res) => {
+  const authmsg = false;
   if (req.session.user_id) {
     res.redirect("/mylists");
   } else {
-    res.render("login");
+    res.render("login",{ authmsg});
   }
 });
 
@@ -76,7 +77,8 @@ app.post("/login", async (req, res) => {
     req.session.user_id = valuser._id;
     res.redirect("/mylists");
   } else {
-    res.redirect("login");
+    const authmsg = true;
+    res.render("login",{ authmsg});
   }
 });
 
