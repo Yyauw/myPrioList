@@ -1,9 +1,14 @@
 #   MyPrioList
 
-my first fullstack proyect!
+mypriolist es mi primer proyecto fullstack, es un webapp que te permite crear lista en las cuales puedes agregarles tareas y ordenarlas en prioridad, organiza tus proyectos, listas de compras, tareas y mucho mas con mypriolist
+
+Stack utilizado
+
+HTML5, CSS, JS, Node.js, Express, EJS, MongoDB, Mongooose
 
 
 #Como empezar en mypriolist!
+
 https://scribehow.com/shared/Mypriolist_como_empezar__EsyP5xfKTVytDlKD63BIAQ
 https://mypriolist.onrender.com/
 
