@@ -11,6 +11,7 @@
   display: flex;
   flex-direction: column;
   padding: 10px;
+  margin-bottom: 5%;
   box-shadow: 0px 17px 21px -2px rgba(0,0,0,0.19);
   -webkit-box-shadow: 0px 17px 21px -2px rgba(0,0,0,0.19);
   -moz-box-shadow: 0px 17px 21px -2px rgba(0,0,0,0.19);
@@ -85,4 +86,17 @@ h1 {
 
 .card-border a:hover:last-of-type{
 text-decoration: underline;
+}
+
+.invitado{
+  border-top: 1px solid gray;
+  margin-top: 10px;
+}
+
+.invitado button{
+  margin-top: 10px;
+  font-size: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #20a520;
 }
