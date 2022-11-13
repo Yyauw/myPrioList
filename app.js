@@ -41,6 +41,16 @@ app.use(
 
 app.use(methodOverride("_method"));
 
+//enviando datos a todas las rutas
+app.use(function (req, res, next) {
+  if (!req.session.user_id) {
+    res.locals.session = false;
+  } else {
+    res.locals.session = true;
+  }
+  next();
+});
+
 app.get("/", (req, res) => {
   res.render("home");
 });
@@ -66,10 +76,18 @@ app.get("/login", (req, res) => {
   if (req.session.user_id) {
     res.redirect("/mylists");
   } else {
-    res.render("login",{ authmsg});
+    res.render("login", { authmsg });
   }
 });
 
+//entrar como invitado
+app.post("/invitado", async (req, res) => {
+  const invitado = await User.findOne({ username: "invitado" });
+  req.session.user_id = invitado._id;
+  res.redirect("/mylists");
+});
+
+//verificar los datos de loggin
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
   const valuser = await User.validateUser(username, password);
@@ -78,8 +96,13 @@ app.post("/login", async (req, res) => {
     res.redirect("/mylists");
   } else {
     const authmsg = true;
-    res.render("login",{ authmsg});
+    res.render("login", { authmsg });
   }
+});
+
+app.get("/logout", (req, res) => {
+  req.session.user_id = null;
+  res.redirect("/home");
 });
 
 //singup

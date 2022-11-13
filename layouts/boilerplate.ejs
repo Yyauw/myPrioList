@@ -17,7 +17,12 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/#about">About us</a></li>
                 <li><a href="/#footer">Info</a></li>
+                <% if(session){ %> 
+                    <li><a href="/logout">Log Out</a></li>
+                    <% } else{%> 
                 <li><a href="/login">Log In</a></li>
+                <% } %> 
+                
             </ul>
         </nav>
     </header>
